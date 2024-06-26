@@ -21,7 +21,14 @@ const formData = reactive({
 
 function submit() {
   const submitData = { ...formData, priority: formData.priority.toLowerCase() };
-  router.post('/task', submitData);
+  router.post('/task', submitData, {
+    onSuccess: () => {
+      formData.title = '';
+      formData.description = '';
+      formData.priority = Priority.LOW;
+      formData.deadline = new Date();
+    }
+  });
 }
 </script>
 

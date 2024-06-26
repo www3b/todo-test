@@ -24,7 +24,7 @@ class TaskRepository
 
   public function delete(int $id)
   {
-    $task = Task::findOne($id);
+    $task = Task::find($id);
 
     if (!$task) {
       return false;

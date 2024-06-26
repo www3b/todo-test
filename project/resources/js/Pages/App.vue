@@ -2,6 +2,8 @@
 import TodoList from '../components/TodoList.vue';
 import TodoItem from '../components/TodoItem.vue';
 import Form from '../components/Form.vue';
+
+const props = defineProps(['tasks']);
 </script>
 
 <template>
@@ -11,7 +13,7 @@ import Form from '../components/Form.vue';
     </div>
     <div class="w-2/3">
       <TodoList>
-        <TodoItem />
+        <TodoItem v-for="task in props.tasks" />
       </TodoList>
     </div>
   </div>

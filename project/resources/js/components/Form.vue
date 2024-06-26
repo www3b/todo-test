@@ -1,23 +1,51 @@
 <script setup>
-import { ref } from 'vue';
-const title = ref('');
-const description = ref('');
+import { reactive } from 'vue';
+import { router } from '@inertiajs/vue3';
+import Calendar from 'primevue/calendar';
+import InputText from 'primevue/inputtext';
+import Textarea from 'primevue/textarea';
+import Dropdown from 'primevue/dropdown';
+import Button from 'primevue/button';
+import { Priority } from '../data';
+
+const priorityOptions = Object.values(Priority);
+
+const formData = reactive({
+  title: '',
+  description: '',
+  priority: Priority.LOW,
+  deadline: new Date(),
+});
+
+function submit() {
+  const submitData = { ...formData, priority: formData.priority.toLowerCase() }
+  router.post('/task', submitData)
+}
 </script>
 
 <template>
-  <label for="title" class="block mb-10">
-    <span>Task title</span>
-    <input id="title"
-      class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-      type="text" v-model="title" />
-  </label>
+  <form @submit.prevent="submit">
+    <div class="mb-5 min-w-full">
+      <InputText class="min-w-full" v-model="formData.title" placeholder="Title" />
+    </div>
 
-  <label for="description" class="block">
-    <span>Task description</span>
-    <textarea id="description" rows="10"
-      class="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-      type="text" v-model="description"></textarea>
-  </label>
+    <div class="mb-5 min-w-full">
+      <Textarea class="min-w-full" v-model="formData.description" rows="10" placeholder="Description" />
+    </div>
 
-  <button class="px-3 py-2 bg-gray-800 text-neutral-100 mt-10">Create</button>
+
+    <div class="flex justify-between">
+      <div class="mr-3">
+        <label>Priority</label>
+        <Dropdown v-model="formData.priority" :options="priorityOptions" name="priority" class="w-full" />
+      </div>
+
+      <div>
+        <label>Deadine</label>
+        <Calendar v-model="formData.deadline" class="w-full" dateFormat="dd/mm/yy" />
+      </div>
+    </div>
+
+    <Button type="submit" class="px-3 py-2 bg-gray-800 text-neutral-100 mt-10">Create</button>
+  </form>
 </template>

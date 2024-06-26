@@ -40,7 +40,7 @@ services:
     working_dir: /var/www
     volumes:
       - ./project:/var/www
-      - /var/www/node_modules
+      - node_modules:/var/www/node_modules
     networks:
       - default
 

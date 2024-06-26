@@ -1,7 +1,9 @@
 import axios from 'axios';
 import { createApp, h } from 'vue'
+import PrimeVue from 'primevue/config';
 import { createInertiaApp } from '@inertiajs/vue3'
 import Layout from './layouts/Layout.vue';
+import Lara from './presets/Lara';
 
 createInertiaApp({
   resolve: name => {
@@ -11,8 +13,12 @@ createInertiaApp({
     return page;
   },
   setup({ el, App, props, plugin }) {
-    createApp({ render: () => h(App, props) })
+    const app = createApp({ render: () => h(App, props) })
       .use(plugin)
+      .use(PrimeVue, {
+        unstyled: true,
+        pt: Lara,
+      })
       .mount(el);
   },
 });

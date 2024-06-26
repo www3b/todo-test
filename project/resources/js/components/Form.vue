@@ -18,8 +18,8 @@ const formData = reactive({
 });
 
 function submit() {
-  const submitData = { ...formData, priority: formData.priority.toLowerCase() }
-  router.post('/task', submitData)
+  const submitData = { ...formData, priority: formData.priority.toLowerCase() };
+  router.post('/task', submitData);
 }
 </script>
 

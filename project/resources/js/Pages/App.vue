@@ -1,9 +1,27 @@
 <script setup>
+import { computed } from 'vue';
 import TodoList from '../components/TodoList.vue';
 import TodoItem from '../components/TodoItem.vue';
 import Form from '../components/Form.vue';
+import { Priority } from '../data';
+
+import 'primeicons/primeicons.css';
 
 const props = defineProps(['tasks', 'errors']);
+
+
+const sortedItems = computed(() => {
+  const priorityOrder = {
+    [Priority.HIGH]: 1,
+    [Priority.MEDIUM]: 2,
+    [Priority.LOW]: 3
+  };
+  function compare(item1, item2) {
+    return priorityOrder[item1.priority] - priorityOrder[item2.priority];
+  }
+
+  return props.tasks.sort(compare);
+})
 </script>
 
 <template>
@@ -13,7 +31,7 @@ const props = defineProps(['tasks', 'errors']);
     </div>
     <div class="w-2/3 border-l-2 overflow-scroll max-h-[80vh]">
       <TodoList>
-        <TodoItem v-for="task in props.tasks" :item="task" />
+        <TodoItem v-for="task in sortedItems" :item="task" />
       </TodoList>
     </div>
   </div>

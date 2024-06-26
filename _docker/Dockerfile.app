@@ -29,10 +29,11 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Copy existing application directory contents
 COPY . /var/www
 
-RUN composer install
-
 # Copy existing application directory permissions
 COPY --chown=www-data:www-data ./ /var/www
+
+# Install dependencies
+RUN composer install
 
 # Change current user to www
 USER www-data

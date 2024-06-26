@@ -9,6 +9,8 @@ import 'primeicons/primeicons.css';
 
 const props = defineProps(['tasks', 'errors']);
 
+console.log('errors', props.errors);
+
 
 const sortedItems = computed(() => {
   const priorityOrder = {
@@ -27,7 +29,7 @@ const sortedItems = computed(() => {
 <template>
   <div class="flex">
     <div class="w-1/3 mr-20">
-      <Form />
+      <Form :errors="errors" />
     </div>
     <div class="w-2/3 border-l-2 overflow-scroll max-h-[80vh]">
       <TodoList>

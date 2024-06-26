@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, defineProps } from 'vue';
 import { router } from '@inertiajs/vue3';
 import Calendar from 'primevue/calendar';
 import InputText from 'primevue/inputtext';
@@ -7,6 +7,8 @@ import Textarea from 'primevue/textarea';
 import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
 import { Priority } from '../data';
+
+const props = defineProps(['errors']);
 
 const priorityOptions = Object.values(Priority);
 
@@ -27,10 +29,12 @@ function submit() {
   <form @submit.prevent="submit">
     <div class="mb-5 min-w-full">
       <InputText class="min-w-full" v-model="formData.title" placeholder="Title" />
+      <small class="text-red-800" v-if="errors.title" id="title-error">{{ errors.title }}</small>
     </div>
 
     <div class="mb-5 min-w-full">
       <Textarea class="min-w-full" v-model="formData.description" rows="10" placeholder="Description" />
+      <small class="text-red-800" v-if="errors.description" id="description-error">{{ errors.description }}</small>
     </div>
 
 

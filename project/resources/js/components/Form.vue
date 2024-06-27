@@ -33,29 +33,32 @@ function submit() {
 
 <template>
   <form @submit.prevent="submit">
-    <div class="mb-5 min-w-full">
+    <div class="mb-8 min-w-full relative">
       <InputText class="min-w-full" v-model="form.title" placeholder="Title" />
-      <small class="text-red-800" v-if="errors.title" id="title-error">{{ errors.title }}</small>
+      <small class="text-red-800 absolute -bottom-5 left-0" v-if="errors.title" id="title-error">{{ errors.title
+        }}</small>
     </div>
 
-    <div class="mb-5 min-w-full">
-      <Textarea class="min-w-full" v-model="form.description" rows="10" placeholder="Description" />
-      <small class="text-red-800" v-if="errors.description" id="description-error">{{ errors.description }}</small>
+    <div class="mb-8 min-w-full relative">
+      <Textarea class="min-w-full min-h-full" v-model="form.description" rows="10" placeholder="Description" />
+      <small class="text-red-800 absolute -bottom-5 left-0" v-if="errors.description" id="description-error">{{
+        errors.description
+      }}</small>
     </div>
 
 
     <div class="flex justify-between">
       <div class="mr-3">
         <label>Priority</label>
-        <Dropdown v-model="form.priority" :options="priorityOptions" name="priority" class="w-full" />
+        <Dropdown v-model="form.priority" :options="priorityOptions" name="priority" class="w-full mt-1" />
       </div>
 
       <div>
         <label>Deadine</label>
-        <Calendar v-model="form.deadline" class="w-full" dateFormat="dd/mm/yy" />
+        <Calendar v-model="form.deadline" dateFormat="dd.mm.yy" class="w-full mt-1" />
       </div>
     </div>
 
-    <Button type="submit" class="px-3 py-2 bg-gray-800 text-neutral-100 mt-10">Create</button>
+    <Button label="Create" type="submit" icon="pi pi-save" :loading="form.processing" class="mt-8" />
   </form>
 </template>

@@ -9,9 +9,8 @@
 docker compose up -d
 ```
 
-#### 3. Install composer dependencies and run migrations in "app" container
+#### 3. Run migrations in "app" container
 
 ```bash
-docker compose exec app composer install
 docker compose exec app php artisan migrate
 ```

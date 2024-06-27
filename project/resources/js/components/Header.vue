@@ -15,7 +15,7 @@ function toggleModal() {
   <header class="shadow-md py-4">
     <div class="flex justify-between mx-3 sm:mx-auto sm:container">
 
-      <h1 class="text-4xl">TODO</h1>
+      <h1 class="text-4xl ml-4">TODO</h1>
       <Button class="md:hidden" @click="toggleModal" label="Create task" />
       <MobileModal :isOpen="modalIsOpen" :onClose="toggleModal">
         <Form :errors="{}" :onSubmit="toggleModal" />

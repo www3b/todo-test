@@ -20,6 +20,7 @@ services:
       - 9000:80
     volumes:
       - ./project:/var/www
+      - vendor:/var/www/vendor
     networks:
       - default
     develop:
@@ -35,7 +36,7 @@ services:
       context: project
       dockerfile: ../_docker/Dockerfile.node
     ports:
-      - "5173:5173"
+      - 5173:5173
     restart: unless-stopped
     working_dir: /var/www
     volumes:
@@ -64,6 +65,7 @@ services:
 
 volumes:
   node_modules:
+  vendor:
 secrets:
   db-password:
     file: secrets/db-password.txt

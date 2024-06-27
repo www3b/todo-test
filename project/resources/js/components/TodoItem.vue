@@ -42,7 +42,7 @@ function deleteTask() {
         Priority: <span :style="{ color: priorityColors[item.priority] }">{{ item.priority }}</span>
       </p>
       <p class="mt-1 text-xs leading-5 text-gray-500">
-        Deadline: {{ item.deadline }}
+        Deadline: {{ new Date(item.deadline).toLocaleDateString("ru-RU") }}
       </p>
       <p>
         <Button @click="deleteTask" icon="pi pi-trash" label="Delete" size="small" severity="danger"

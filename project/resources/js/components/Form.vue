@@ -8,7 +8,7 @@ import Dropdown from 'primevue/dropdown';
 import Button from 'primevue/button';
 import { Priority } from '../data';
 
-const props = defineProps(['errors']);
+const props = defineProps(['errors', 'onSubmit']);
 
 const priorityOptions = Object.values(Priority);
 
@@ -25,6 +25,7 @@ function submit() {
     priority: data.priority.toLowerCase(),
   })).post('/task', {
     onSuccess: () => {
+      props.onSubmit();
       form.reset();
     }
   });
@@ -32,23 +33,23 @@ function submit() {
 </script>
 
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit" class="mx-auto">
     <div class="mb-8 min-w-full relative">
       <InputText class="min-w-full" v-model="form.title" placeholder="Title" />
       <small class="text-red-800 absolute -bottom-5 left-0" v-if="errors.title" id="title-error">{{ errors.title
         }}</small>
     </div>
 
-    <div class="mb-8 min-w-full relative">
+    <div class="mb-6 min-w-full relative">
       <Textarea class="min-w-full min-h-full" v-model="form.description" rows="10" placeholder="Description" />
       <small class="text-red-800 absolute -bottom-5 left-0" v-if="errors.description" id="description-error">{{
         errors.description
-      }}</small>
+        }}</small>
     </div>
 
 
-    <div class="flex justify-between">
-      <div class="mr-3">
+    <div class="flex flex-col lg:flex-row md:justify-between">
+      <div class="sm:mb-3 lg:mr-3">
         <label>Priority</label>
         <Dropdown v-model="form.priority" :options="priorityOptions" name="priority" class="w-full mt-1" />
       </div>

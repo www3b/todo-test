@@ -1,5 +1,5 @@
 <template>
-  <ul role="list" class="divide-y divide-gray-100">
+  <ul role="list">
     <slot />
   </ul>
 </template>

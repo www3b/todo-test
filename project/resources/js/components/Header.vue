@@ -1,20 +1,25 @@
-<template>
-  <nav class="bg-gray-800">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="flex h-16 items-center justify-between">
-        <div class="flex items-center">
-          <div class="flex-shrink-0">
-            <img class="h-8 w-8" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-              alt="Your Company">
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
+<script setup>
+import { ref } from 'vue';
+import Button from 'primevue/button';
+import MobileModal from '../components/Modal.vue';
+import Form from '../components/Form.vue';
 
-  <header class="bg-white shadow">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">TODO list</h1>
+let modalIsOpen = ref(false);
+
+function toggleModal() {
+  modalIsOpen.value = !modalIsOpen.value;
+}
+</script>
+
+<template>
+  <header class="shadow-md py-4">
+    <div class="flex justify-between mx-3 sm:mx-auto sm:container">
+
+      <h1 class="text-4xl">TODO</h1>
+      <Button class="md:hidden" @click="toggleModal" label="Create task" />
+      <MobileModal :isOpen="modalIsOpen" :onClose="toggleModal">
+        <Form :errors="{}" :onSubmit="toggleModal" />
+      </MobileModal>
     </div>
   </header>
 </template>

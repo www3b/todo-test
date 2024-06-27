@@ -9,5 +9,10 @@ export default defineConfig({
             refresh: true,
         }),
         PluginVue(),
-    ]
+    ],
+    server: {
+        host: true,
+        port: 5173,
+        origin: 'http://localhost:5173',
+    }
 });

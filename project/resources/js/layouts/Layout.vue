@@ -6,7 +6,7 @@ import Header from '../components/Header.vue';
   <div class="min-h-full">
     <Header />
 
-    <main class="sm:container mx-auto mt-8">
+    <main class="lg:container mx-auto md:max-lg:mx-10 mt-8">
       <slot />
     </main>
   </div>

@@ -25,7 +25,9 @@ function submit() {
     priority: data.priority.toLowerCase(),
   })).post('/task', {
     onSuccess: () => {
-      props.onSubmit();
+      if (props.onSubmit) {
+        props.onSubmit();
+      }
       form.reset();
     }
   });
